@@ -4,12 +4,12 @@ This code example demonstrates the use of the Class-B Safety Test Library to tes
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-ce240064-safety-tcpwm-test)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDAwNjQiLCJTcGVjIE51bWJlciI6IjAwMi00MDA2NCIsIkRvYyBUaXRsZSI6IkNsYXNzLUIgU2FmZXR5IFRlc3Q6IFRDUFdNIHBlcmlwaGVyYWxzIiwicmlkIjoic2RhayIsIkRvYyB2ZXJzaW9uIjoiMS4wLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDAwNjQiLCJTcGVjIE51bWJlciI6IjAwMi00MDA2NCIsIkRvYyBUaXRsZSI6IkNsYXNzLUIgU2FmZXR5IFRlc3Q6IFRDUFdNIHBlcmlwaGVyYWxzIiwicmlkIjoic2RhayIsIkRvYyB2ZXJzaW9uIjoiMS4xLjAiLCJEb2MgTGFuZ3VhZ2UiOiJFbmdsaXNoIiwiRG9jIERpdmlzaW9uIjoiTUNEIiwiRG9jIEJVIjoiSUNXIiwiRG9jIEZhbWlseSI6IlBTT0MifQ==)
 
 
 ## Requirements
 
-- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.2 or later (tested with v3.2)
+- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.3 or later (tested with v3.3)
 - Board support package (BSP) minimum required version: v4.2.0
 - Programming language: C
 - Associated parts: [PSoC&trade; 6 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu), [XMC7000 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-industrial-microcontroller-based-on-arm-cortex-m)
@@ -18,6 +18,8 @@ This code example demonstrates the use of the Class-B Safety Test Library to tes
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
 - GNU Arm&reg; Embedded Compiler v11.3.1 (`GCC_ARM`) – Default value of `TOOLCHAIN`
+- Arm® Compiler v6.22 (`ARM`)
+- IAR C/C++ Compiler v9.50.2 (`IAR`)
 
 
 ## Supported kits (make variable 'TARGET')
@@ -43,6 +45,57 @@ This code example demonstrates the use of the Class-B Safety Test Library to tes
 This example uses the board's default configuration. See the kit user guide to ensure that the board is configured correctly. For the PWM test, connect the `PWM line` pin to `PWM_IN_PIN` pins using jumper wires.
 
 > **Note:** The PSoC&trade; 6 Bluetooth&reg; LE Pioneer Kit (CY8CKIT-062-BLE) and the PSoC&trade; 6 Wi-Fi Bluetooth&reg; Pioneer Kit (CY8CKIT-062-WIFI-BT) ship with KitProg2 installed. ModusToolbox&trade; requires KitProg3. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
+
+**Table 1. Jumper connections for PWM test**
+ BSP | PWM line | PWM_IN_PIN 
+ --------------- | ------ | ----- 
+ CY8CEVAL-062S2 | P1.0 | P6.0
+ CY8CEVAL-062S2-CYW43022CUB | P1.0 | P6.0 
+ CY8CEVAL-062S2-LAI-43439M2 | P1.0 | P6.0
+ CY8CEVAL-062S2-LAI-4373M2 | P1.0 | P6.0
+ CY8CEVAL-062S2-MUR-43439M2 | P1.0 | P6.0
+ CY8CEVAL-062S2-MUR-4373EM2 | P1.0 | P6.0
+ CY8CEVAL-062S2-MUR-4373M2 | P1.0 | P6.0
+ CY8CKIT-062-BLE | P12.0 | P10.0
+ CY8CKIT-062-WIFI-BT | P5.2 | P5.5
+ CY8CKIT-062S2-43012 | P9.0 | P5.5
+ CY8CKIT-062S4 | P2.6 | P2.1
+ CY8CKIT-064B0S2-4343W | P12.0 | P10.0
+ CY8CPROTO-062-4343W | P8.6 | P6.5
+ CY8CPROTO-062S2-43439 | P8.6 | P6.5
+ CY8CPROTO-062S3-4343W | P7.2 | P6.5
+ CY8CPROTO-063-BLE | P9.0 | P10.0
+ CYW9P62S1-43012EVB-01 | P5.2 | P5.5
+ CYW9P62S1-43438EVB-01 | P12.0 | P5.5
+
+<br>
+
+**Table 2. Jumper connections for PWM Gate Kill**
+
+>**Note:** Connect LPCOMP +ve pin pin to VCC for PWM Gate Kill test
+
+ BSP |  LPCOMP +ve pin 
+ --------------- | ------  
+ CY8CEVAL-062S2 | P5.6 
+ CY8CEVAL-062S2-CYW43022CUB | P5.6  
+ CY8CEVAL-062S2-LAI-43439M2 | P5.6  
+ CY8CEVAL-062S2-LAI-4373M2 | P5.6  
+ CY8CEVAL-062S2-MUR-43439M2 | P5.6  
+ CY8CEVAL-062S2-MUR-4373EM2 | P5.6  
+ CY8CEVAL-062S2-MUR-4373M2 | P5.6  
+ CY8CKIT-062-BLE | P5.4 
+ CY8CKIT-062-WIFI-BT | P5.6 
+ CY8CKIT-062S2-43012 | P5.6 
+ CY8CKIT-062S4 | P5.6 
+ CY8CKIT-064B0S2-4343W | P5.6 
+ CY8CPROTO-062-4343W | P5.6 
+ CY8CPROTO-062S2-43439 | P5.6 
+ CY8CPROTO-062S3-4343W | P5.6 
+ CY8CPROTO-063-BLE | P5.4
+ CYW9P62S1-43012EVB-01 | P5.6 
+ CYW9P62S1-43438EVB-01 | P5.6 
+
+<br>
 
 
 ## Software setup
@@ -253,7 +306,7 @@ By executing these tests, the example ensures the proper functioning of the TCPW
 
 ### Resources and settings
 
-**Table 1. Application resources**
+**Table 3. Application resources**
 
  Resource  |  Alias/object     |    Purpose
  :-------- | :-------------    | :------------
@@ -292,6 +345,7 @@ Document title: *CE240064* - *Class-B Safety Test: TCPWM peripherals*
  Version | Description of change
  ------- | ---------------------
  1.0.0   | New code example
+ 1.1.0   | Added support for IAR and ARM compiler
 
 <br>
 

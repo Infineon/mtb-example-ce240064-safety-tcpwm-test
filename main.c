@@ -183,7 +183,7 @@ void timer_test(void)
 {
     SelfTest_Timer_Counter_init(CYBSP_TIMER_COUNTER_TEST_HW,
             CYBSP_TIMER_COUNTER_TEST_NUM, &CYBSP_TIMER_COUNTER_TEST_config,
-            CYBSP_TIMER_COUNTER_TEST_IRQ);
+            ((IRQn_Type)CYBSP_TIMER_COUNTER_TEST_IRQ));
 
 
     /* Run Timer/Counter Self Test... */
@@ -326,6 +326,8 @@ void pwm_gate_kill(void)
 
                  /* Process error */
                  printf("Error: PWM GateKill FAIL\r\n");
+                 printf("Ensure LPCOMP +ve pin is connected to VCC -"
+                " Refer Hardware setup section in Readme\r\n");
 
            }
            else
